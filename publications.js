@@ -18,7 +18,8 @@ async function loadBibtexData() {
       publisher: entry.entryTags.journal || entry.entryTags.booktitle || 'Unknown Publisher',
       year: parseInt(entry.entryTags.year) || 'Unknown Year',  // Ensure year is an integer for sorting
       quartile: entry.entryTags.rank || 'No Rank',  // Add this manually in BibTeX if needed
-      pdfLink: entry.entryTags.pdf ? `./pdfs/${entry.citationKey}.pdf` : null,  // Link to local PDF
+      //pdfLink: entry.entryTags.pdf ? `./pdfs/${entry.citationKey}.pdf` : null,  // Link to local PDF
+      pdfLink: `./pdfs/${entry.citationKey}.pdf`,  // Link to local PDF
       codeLink: entry.entryTags.code || null, // Code link if present in BibTeX
       datasetLink: entry.entryTags.dataset || null, // Dataset link if present in BibTeX
       ieeeCitation: generateIeeeCitation(entry),  // Generate IEEE citation format
