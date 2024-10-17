@@ -81,7 +81,7 @@ html {
 .social-icon {
     display: inline-block; /* Ensures transform can be applied */
     margin-right: 15px;
-    font-size: 1.5rem;
+    font-size: 2.0rem;
     color: #0078d7;
     transition: transform 0.1s ease, color 0.3s ease;
     z-index: 1;
@@ -390,6 +390,13 @@ html {
         margin-right: 10px; /* Space between icon and text */
         font-size: 1.2rem;
     }
+    .social-icon {
+        margin-right: 5px;
+        font-size: 1.5rem;
+    }
+    .pub-buttons .btn {
+        margin-right: 2px;
+      }
 }
 
 
