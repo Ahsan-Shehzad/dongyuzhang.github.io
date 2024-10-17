@@ -192,7 +192,8 @@ html {
     margin-right: 10px;
   }
   .pub-buttons .btn {
-    margin-right: 10px;
+    margin-right: 20px;
+  
   }
 
 /* Awards Section Styling */
@@ -396,6 +397,8 @@ html {
     }
     .pub-buttons .btn {
         margin-right: 2px;
+        font-size: 12px;
+        padding: 5px 10px;
       }
 }
 
