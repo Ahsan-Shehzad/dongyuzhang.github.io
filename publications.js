@@ -10,7 +10,10 @@ async function loadBibtexData() {
     // Parse BibTeX using bibtexParse.js
     const parsedBibtex = bibtexParse.toJSON(bibtexText);
 
-    // Process parsed entries into the required format and sort by year in descending order
+    // List of citation keys to prioritize at the top in a specific order
+    const prioritizedKeys = ['Zhang20213214', 'Zhang20236141'];
+
+    // Process parsed entries into the required format
     bibtexData = parsedBibtex.map(entry => ({
       key: entry.citationKey,
       title: entry.entryTags.title || 'Unknown Title',
@@ -18,15 +21,26 @@ async function loadBibtexData() {
       publisher: entry.entryTags.journal || entry.entryTags.booktitle || 'Unknown Publisher',
       year: parseInt(entry.entryTags.year) || 'Unknown Year',  // Ensure year is an integer for sorting
       quartile: entry.entryTags.rank || 'No Rank',  // Add this manually in BibTeX if needed
-      //pdfLink: entry.entryTags.pdf ? `./pdfs/${entry.citationKey}.pdf` : null,  // Link to local PDF
       pdfLink: `./pdfs/${entry.citationKey}.pdf`,  // Link to local PDF
       codeLink: entry.entryTags.code || null, // Code link if present in BibTeX
       datasetLink: entry.entryTags.dataset || null, // Dataset link if present in BibTeX
       ieeeCitation: generateIeeeCitation(entry),  // Generate IEEE citation format
     }));
 
-    // Sort publications by year in descending order
-    bibtexData.sort((a, b) => b.year - a.year);
+    // Split publications into prioritized and non-prioritized
+    const prioritizedPublications = bibtexData.filter(pub => prioritizedKeys.includes(pub.key));
+    const nonPrioritizedPublications = bibtexData.filter(pub => !prioritizedKeys.includes(pub.key));
+
+    // Sort the prioritized publications based on the order in `prioritizedKeys`
+    prioritizedPublications.sort((a, b) => {
+      return prioritizedKeys.indexOf(a.key) - prioritizedKeys.indexOf(b.key);
+    });
+
+    // Sort the remaining publications by year in descending order
+    nonPrioritizedPublications.sort((a, b) => b.year - a.year);
+
+    // Combine the prioritized and non-prioritized publications
+    bibtexData = [...prioritizedPublications, ...nonPrioritizedPublications];
 
     // Load the first set of publications
     loadPublications(bibtexData, 20);
@@ -34,6 +48,9 @@ async function loadBibtexData() {
     console.error('Error loading or parsing BibTeX:', error);
   }
 }
+
+
+
 
 // Function to format authors for IEEE style
 function formatAuthors(authorsString) {
