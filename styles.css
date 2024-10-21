@@ -402,34 +402,5 @@ html {
       }
 }
 
-/* Add border to image-based icons */
-.award-image {
-    border: 1px solid #e2e2e2; /* Blue border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 3px; /* Optional padding inside the border */
-}
 
-/* For image-based icons, move to the top on mobile */
-@media (max-width: 768px) {
-    .award-image {
-        width: 200px; /* Adjust the image size for mobile */
-        height: auto; /* Maintain aspect ratio */
-        margin: 0 auto 10px; /* Center the image and add spacing below */
-    }
 
-    /* Ensure images appear above text on mobile */
-    .d-flex.flex-column .award-image {
-        order: -1; /* Move the image to the top in the flex-column layout */
-    }
-}
-
-/* Keep the current desktop size and layout for images and icons */
-@media (min-width: 768px) {
-    .award-image {
-        width: 52px; /* Original size for desktop */
-        height: 42px;
-    }
-    .award-icon.fa {
-        font-size: 2rem; /* Keep Font Awesome icons same size */
-    }
-}
