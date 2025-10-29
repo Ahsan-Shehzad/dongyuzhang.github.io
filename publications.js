@@ -11,7 +11,7 @@ async function loadBibtexData() {
     const parsedBibtex = bibtexParse.toJSON(bibtexText);
 
     // List of citation keys to prioritize at the top in a specific order
-    const prioritizedKeys = ['Zhang20213214', 'Zhang20236141'];
+    const prioritizedKeys = ['Abid2025','Shehzad20251', 'Shehzad20252', 'Zhang20213214', 'Zhang20236141'];
 
     // Process parsed entries into the required format
     bibtexData = parsedBibtex.map(entry => ({
